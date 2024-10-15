@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 밤 곤듀와 함께 볼 영화 고르기!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        #question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>오늘 밤 곤듀와 함께 볼 영화 고르기!</h1>
+    <div id="question"></div>
+    <div id="options"></div>
+    <div id="result"></div>
+
+    <script>
+        let questions = [
+            {
+                question: "곤듀와 함께 갔던 여행지가 아닌 곳은?",
+                options: ["푸켓", "뭄바이", "스위스", "로마"]
+            },
+            {
+                question: "곤듀가 좋아하는 색이 아닌 것은?",
+                options: ["핑크", "퍼플", "노랑", "갈색"]
+            },
+            {
+                question: "곤듀가 좋아하는 가수가 아닌 것은?",
+                options: ["신화", "디피알이안", "몬스타엑스", "지오디"]
+            },
+            {
+                question: "빈칸을 채우세요: '미도리, 내가 잘못했어. 네가 ㅇㅇ 쇼트케이크를 먹기 싫어졌다는걸 알았어야 했는데.'",
+                options: ["오렌지", "포도", "레몬", "딸기"]
+            },
+            {
+                question: "다음 중 곤듀가 5점을 준 영화가 아닌 것은?",
+                options: ["솔트번", "13라이브즈", "미드나이트인파리", "노팅힐"]
+            },
+            {
+                question: "어제 본 영화의 제목은?",
+                options: ["CapeFear", "CapePear", "CakePier", "CapePier"]
+            },
+            {
+                question: "곤듀가 한번도 붙여주지 않았던 애칭은?",
+                options: ["두부", "토토로", "정햄찌", "엄마아들"]
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function showQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById('question').innerText = questions[currentQuestion].question;
+                let optionsHtml = '';
+                questions[currentQuestion].options.forEach(option => {
+                    optionsHtml += `<button onclick="answer('${option}')">${option}</button>`;
+                });
+                document.getElementById('options').innerHTML = optionsHtml;
+            } else {
+                showWaitMessage();
+            }
+        }
+
+        function answer(selected) {
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function showWaitMessage() {
+            document.getElementById('question').innerText = "잠시 기다리세요. 최첨단 AI가 영화를 고르는 중입니다...";
+            document.getElementById('options').innerHTML = '';
+            setTimeout(showResult, 5000); // 5초 후에 결과 보여주기
+        }
+
+        function showResult() {
+            document.getElementById('result').innerText = "추천 영화: 그린 북";
+        }
+
+        // 첫 질문 보여주기
+        showQuestion();
+    </script>
+</body>
+</html>
